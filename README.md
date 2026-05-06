@@ -34,7 +34,7 @@ You can run the entire platform locally without any cloud dependencies.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ad-pipeline-monitor.git
+git clone https://github.com/Anushkaghei/ad-pipeline-monitor.git
 cd ad-pipeline-monitor
 
 # Configure environment variables
