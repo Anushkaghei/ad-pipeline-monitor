@@ -1,0 +1,91 @@
+version: "3.9"
+
+services:
+  # ── PostgreSQL ───────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: adpipe_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ad_pipeline}
+      POSTGRES_USER: ${POSTGRES_USER:-pipeline_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pipeline_pass}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/01_init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-pipeline_user} -d ${POSTGRES_DB:-ad_pipeline}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - adpipe
+
+  # ── App (Monitoring + Scheduler) ─────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.app
+    container_name: adpipe_app
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./ingestion:/app/ingestion
+      - ./monitoring:/app/monitoring
+      - ./scripts:/app/scripts
+      - ./data:/app/data
+    networks:
+      - adpipe
+
+  # ── FastAPI ──────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.app
+    container_name: adpipe_api
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./api:/app/api
+      - ./monitoring:/app/monitoring
+      - ./ingestion:/app/ingestion
+    networks:
+      - adpipe
+
+  # ── dbt ──────────────────────────────────────────────────
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dbt
+    container_name: adpipe_dbt
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./dbt_project:/dbt
+    networks:
+      - adpipe
+    # Keep container running so we can exec into it
+    command: ["tail", "-f", "/dev/null"]
+
+volumes:
+  postgres_data:
+
+networks:
+  adpipe:
+    driver: bridge

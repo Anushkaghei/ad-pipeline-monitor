@@ -1,0 +1,40 @@
+[
+  {
+    "campaign_id": "meta_camp_001",
+    "campaign_name": "Summer Sale 2025 - Conversions",
+    "status": "ACTIVE",
+    "objective": "CONVERSIONS",
+    "daily_budget": 150.00,
+    "insights": [
+      {"date_start": "2025-06-01", "date_stop": "2025-06-01", "impressions": 42350, "clicks": 1285, "spend": 148.72, "conversions": 38, "ctr": 0.030342, "cpc": 0.1157},
+      {"date_start": "2025-06-02", "date_stop": "2025-06-02", "impressions": 45120, "clicks": 1390, "spend": 149.95, "conversions": 42, "ctr": 0.030812, "cpc": 0.1079},
+      {"date_start": "2025-06-03", "date_stop": "2025-06-03", "impressions": 38900, "clicks": 1102, "spend": 142.30, "conversions": 31, "ctr": 0.028329, "cpc": 0.1291}
+    ],
+    "account_id": "act_123456789"
+  },
+  {
+    "campaign_id": "meta_camp_002",
+    "campaign_name": "Brand Awareness Q2",
+    "status": "ACTIVE",
+    "objective": "BRAND_AWARENESS",
+    "daily_budget": 200.00,
+    "insights": [
+      {"date_start": "2025-06-01", "date_stop": "2025-06-01", "impressions": 98200, "clicks": 2105, "spend": 195.40, "conversions": 12, "ctr": 0.021435, "cpc": 0.0928},
+      {"date_start": "2025-06-02", "date_stop": "2025-06-02", "impressions": 102450, "clicks": 2280, "spend": 198.75, "conversions": 15, "ctr": 0.022255, "cpc": 0.0872},
+      {"date_start": "2025-06-03", "date_stop": "2025-06-03", "impressions": 95600, "clicks": 1980, "spend": 191.20, "conversions": 10, "ctr": 0.020711, "cpc": 0.0966}
+    ],
+    "account_id": "act_123456789"
+  },
+  {
+    "campaign_id": "meta_camp_003",
+    "campaign_name": "Retargeting - Cart Abandoners",
+    "status": "PAUSED",
+    "objective": "CONVERSIONS",
+    "daily_budget": 75.00,
+    "insights": [
+      {"date_start": "2025-06-01", "date_stop": "2025-06-01", "impressions": 15200, "clicks": 890, "spend": 72.50, "conversions": 28, "ctr": 0.058553, "cpc": 0.0815},
+      {"date_start": "2025-06-02", "date_stop": "2025-06-02", "impressions": 14800, "clicks": 845, "spend": 71.90, "conversions": 25, "ctr": 0.057095, "cpc": 0.0851}
+    ],
+    "account_id": "act_123456789"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "adset_id": "meta_adset_001",
+    "adset_name": "Interest - Fashion Enthusiasts 25-44",
+    "campaign_id": "meta_camp_001",
+    "status": "ACTIVE",
+    "targeting": {"age_min": 25, "age_max": 44, "interests": ["fashion", "online_shopping"], "genders": [1, 2]},
+    "daily_budget": 50.00,
+    "insights": [
+      {"date_start": "2025-06-01", "date_stop": "2025-06-01", "impressions": 18500, "clicks": 620, "spend": 49.80},
+      {"date_start": "2025-06-02", "date_stop": "2025-06-02", "impressions": 19200, "clicks": 655, "spend": 49.95}
+    ]
+  },
+  {
+    "adset_id": "meta_adset_002",
+    "adset_name": "Lookalike - Past Purchasers",
+    "campaign_id": "meta_camp_001",
+    "status": "ACTIVE",
+    "targeting": {"custom_audiences": ["lookalike_purchasers_1pct"], "countries": ["US"]},
+    "daily_budget": 100.00,
+    "insights": [
+      {"date_start": "2025-06-01", "date_stop": "2025-06-01", "impressions": 23850, "clicks": 665, "spend": 98.92},
+      {"date_start": "2025-06-02", "date_stop": "2025-06-02", "impressions": 25920, "clicks": 735, "spend": 100.00}
+    ]
+  }
+]

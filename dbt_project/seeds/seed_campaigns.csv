@@ -1,0 +1,11 @@
+campaign_id,campaign_name,platform,status,objective,daily_budget
+meta_camp_001,Summer Sale 2025 - Conversions,meta,ACTIVE,CONVERSIONS,150.00
+meta_camp_002,Brand Awareness Q2,meta,ACTIVE,BRAND_AWARENESS,200.00
+meta_camp_003,Retargeting - Cart Abandoners,meta,ACTIVE,CONVERSIONS,75.00
+meta_camp_004,App Install - iOS,meta,PAUSED,APP_INSTALLS,100.00
+meta_camp_005,Lead Gen - Webinar Signup,meta,ACTIVE,LEAD_GENERATION,60.00
+goog_camp_001,Search - Brand Terms,google,ENABLED,SEARCH,120.00
+goog_camp_002,Search - Competitor Terms,google,ENABLED,SEARCH,200.00
+goog_camp_003,Display - Remarketing,google,ENABLED,DISPLAY,80.00
+goog_camp_004,Shopping - All Products,google,ENABLED,SHOPPING,250.00
+goog_camp_005,YouTube - Pre-Roll Ads,google,PAUSED,VIDEO,100.00

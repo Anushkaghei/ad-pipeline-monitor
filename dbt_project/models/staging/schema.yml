@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: stg_meta_campaigns
+    description: "Cleaned Meta Ads campaign data"
+    columns:
+      - name: campaign_id
+        description: "Campaign identifier"
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
+      - name: campaign_status
+        tests:
+          - accepted_values:
+              values: ['ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED']
+      - name: report_date
+        tests:
+          - not_null
+      - name: impressions
+        tests:
+          - not_null
+      - name: spend
+        tests:
+          - not_null
+      - name: platform
+        tests:
+          - accepted_values:
+              values: ['meta']
+
+  - name: stg_google_campaigns
+    description: "Cleaned Google Ads campaign data"
+    columns:
+      - name: campaign_id
+        description: "Campaign identifier"
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
+      - name: campaign_status
+        tests:
+          - accepted_values:
+              values: ['ENABLED', 'PAUSED', 'REMOVED']
+      - name: campaign_type
+        tests:
+          - accepted_values:
+              values: ['SEARCH', 'DISPLAY', 'SHOPPING', 'VIDEO', 'PERFORMANCE_MAX']
+      - name: report_date
+        tests:
+          - not_null
+      - name: impressions
+        tests:
+          - not_null
+      - name: spend
+        tests:
+          - not_null
+      - name: platform
+        tests:
+          - accepted_values:
+              values: ['google']

@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: fct_ad_performance
+    description: "Unified daily campaign performance across all platforms"
+    columns:
+      - name: performance_id
+        description: "Surrogate key (platform + campaign_id + report_date)"
+        tests:
+          - unique
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: report_date
+        tests:
+          - not_null
+      - name: platform
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['meta', 'google']
+      - name: spend
+        tests:
+          - not_null
+
+  - name: dim_campaign
+    description: "Campaign dimension — latest attributes per campaign"
+    columns:
+      - name: campaign_key
+        description: "Surrogate key (platform + campaign_id)"
+        tests:
+          - unique
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: platform
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['meta', 'google']
+
+  - name: agg_daily_spend
+    description: "Daily aggregated spend by platform and campaign"
+    columns:
+      - name: report_date
+        tests:
+          - not_null
+      - name: platform
+        tests:
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: total_spend
+        tests:
+          - not_null

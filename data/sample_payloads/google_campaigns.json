@@ -1,0 +1,40 @@
+[
+  {
+    "campaign_id": "goog_camp_001",
+    "campaign_name": "Search - Brand Terms",
+    "status": "ENABLED",
+    "campaign_type": "SEARCH",
+    "budget_amount": 120.00,
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 32100, "clicks": 4820, "cost": 118.50, "conversions": 95, "ctr": 0.150156, "cpc": 0.0246},
+      {"date": "2025-06-02", "impressions": 33400, "clicks": 5010, "cost": 119.80, "conversions": 102, "ctr": 0.149940, "cpc": 0.0239},
+      {"date": "2025-06-03", "impressions": 31200, "clicks": 4650, "cost": 117.20, "conversions": 88, "ctr": 0.149038, "cpc": 0.0252}
+    ],
+    "customer_id": "cust_987654321"
+  },
+  {
+    "campaign_id": "goog_camp_002",
+    "campaign_name": "Search - Competitor Terms",
+    "status": "ENABLED",
+    "campaign_type": "SEARCH",
+    "budget_amount": 200.00,
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 28500, "clicks": 1425, "cost": 195.30, "conversions": 22, "ctr": 0.050000, "cpc": 0.1371},
+      {"date": "2025-06-02", "impressions": 29100, "clicks": 1510, "cost": 198.40, "conversions": 25, "ctr": 0.051890, "cpc": 0.1314},
+      {"date": "2025-06-03", "impressions": 27800, "clicks": 1380, "cost": 192.60, "conversions": 19, "ctr": 0.049640, "cpc": 0.1396}
+    ],
+    "customer_id": "cust_987654321"
+  },
+  {
+    "campaign_id": "goog_camp_003",
+    "campaign_name": "Display - Remarketing",
+    "status": "ENABLED",
+    "campaign_type": "DISPLAY",
+    "budget_amount": 80.00,
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 152000, "clicks": 760, "cost": 78.50, "conversions": 8, "ctr": 0.005000, "cpc": 0.1033},
+      {"date": "2025-06-02", "impressions": 148500, "clicks": 742, "cost": 77.90, "conversions": 7, "ctr": 0.004997, "cpc": 0.1050}
+    ],
+    "customer_id": "cust_987654321"
+  }
+]

@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Ad Pipeline Monitor — ELT Observability Platform
+  Lambda functions for ingestion, monitoring, and alerting.
+
+Globals:
+  Function:
+    Timeout: 300
+    MemorySize: 256
+    Runtime: python3.11
+    Environment:
+      Variables:
+        POSTGRES_HOST: !Ref DBHost
+        POSTGRES_PORT: !Ref DBPort
+        POSTGRES_DB: !Ref DBName
+        POSTGRES_USER: !Ref DBUser
+        POSTGRES_PASSWORD: !Ref DBPassword
+        SLACK_WEBHOOK_URL: !Ref SlackWebhookUrl
+        ROW_COUNT_DEVIATION_THRESHOLD: "0.30"
+        NULL_THRESHOLD_PERCENT: "5.0"
+        FRESHNESS_SLA_HOURS: "6"
+
+Parameters:
+  DBHost:
+    Type: String
+    Default: "localhost"
+    Description: PostgreSQL host
+  DBPort:
+    Type: String
+    Default: "5432"
+  DBName:
+    Type: String
+    Default: "ad_pipeline"
+  DBUser:
+    Type: String
+    Default: "pipeline_user"
+  DBPassword:
+    Type: String
+    NoEcho: true
+    Default: "pipeline_pass"
+  SlackWebhookUrl:
+    Type: String
+    Default: ""
+    Description: Slack incoming webhook URL (optional)
+
+Resources:
+  # ── Ingestion Lambda ───────────────────────────────────────
+  IngestionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: adpipe-ingestion
+      Handler: ingestion_handler.handler
+      CodeUri: lambda/
+      Description: Ingest data from ad platforms
+      Events:
+        ScheduledIngestion:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
+            Description: Run ingestion every hour
+            Enabled: true
+      Policies:
+        - CloudWatchLogsFullAccess
+
+  # ── Monitoring Lambda ──────────────────────────────────────
+  MonitoringFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: adpipe-monitoring
+      Handler: monitoring_handler.handler
+      CodeUri: lambda/
+      Description: Run monitoring checks
+      Events:
+        ScheduledMonitoring:
+          Type: Schedule
+          Properties:
+            Schedule: rate(30 minutes)
+            Description: Run monitoring every 30 minutes
+            Enabled: true
+      Policies:
+        - CloudWatchLogsFullAccess
+
+  # ── Alert Lambda ───────────────────────────────────────────
+  AlertFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: adpipe-alerting
+      Handler: alert_handler.handler
+      CodeUri: lambda/
+      Description: Dispatch alerts
+      Policies:
+        - CloudWatchLogsFullAccess
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ses:SendEmail
+                - ses:SendRawEmail
+              Resource: "*"
+
+Outputs:
+  IngestionFunctionArn:
+    Description: Ingestion Lambda ARN
+    Value: !GetAtt IngestionFunction.Arn
+  MonitoringFunctionArn:
+    Description: Monitoring Lambda ARN
+    Value: !GetAtt MonitoringFunction.Arn
+  AlertFunctionArn:
+    Description: Alert Lambda ARN
+    Value: !GetAtt AlertFunction.Arn

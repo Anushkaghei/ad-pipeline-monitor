@@ -1,0 +1,22 @@
+name: 'ad_pipeline_monitor'
+version: '1.0.0'
+config-version: 2
+
+profile: 'ad_pipeline'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  row_count_deviation_threshold: 0.30
+  null_threshold_percent: 5.0
+  freshness_sla_hours: 6

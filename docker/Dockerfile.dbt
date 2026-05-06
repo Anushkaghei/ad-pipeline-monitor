@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+
+WORKDIR /dbt
+
+# System deps
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc libpq-dev git && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install dbt
+RUN pip install --no-cache-dir dbt-postgres==1.9.0
+
+# Copy dbt project
+COPY dbt_project/ /dbt/
+
+CMD ["dbt", "debug", "--profiles-dir", "/dbt", "--project-dir", "/dbt"]

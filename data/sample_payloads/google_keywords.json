@@ -1,0 +1,35 @@
+[
+  {
+    "keyword_id": "goog_kw_001",
+    "keyword_text": "buy shoes online",
+    "campaign_id": "goog_camp_001",
+    "ad_group_id": "ag_001",
+    "match_type": "EXACT",
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 8200, "clicks": 1230, "cost": 28.50, "quality_score": 9},
+      {"date": "2025-06-02", "impressions": 8500, "clicks": 1290, "cost": 29.10, "quality_score": 9}
+    ]
+  },
+  {
+    "keyword_id": "goog_kw_002",
+    "keyword_text": "running shoes sale",
+    "campaign_id": "goog_camp_001",
+    "ad_group_id": "ag_001",
+    "match_type": "PHRASE",
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 5600, "clicks": 840, "cost": 22.40, "quality_score": 7},
+      {"date": "2025-06-02", "impressions": 5900, "clicks": 870, "cost": 23.10, "quality_score": 7}
+    ]
+  },
+  {
+    "keyword_id": "goog_kw_003",
+    "keyword_text": "nike competitor brand",
+    "campaign_id": "goog_camp_002",
+    "ad_group_id": "ag_002",
+    "match_type": "BROAD",
+    "metrics": [
+      {"date": "2025-06-01", "impressions": 12400, "clicks": 620, "cost": 85.20, "quality_score": 4},
+      {"date": "2025-06-02", "impressions": 12800, "clicks": 650, "cost": 87.50, "quality_score": 4}
+    ]
+  }
+]

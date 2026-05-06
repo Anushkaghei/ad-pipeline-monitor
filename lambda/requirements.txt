@@ -1,0 +1,8 @@
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+pandas==2.2.3
+pydantic==2.10.3
+requests==2.32.3
+rich==13.9.4
+boto3==1.35.81
+python-dotenv==1.1.0

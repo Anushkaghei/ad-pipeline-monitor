@@ -1,0 +1,81 @@
+name: CI — Ad Pipeline Monitor
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff
+      - run: ruff check .
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: lint
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: ad_pipeline_test
+          POSTGRES_USER: pipeline_user
+          POSTGRES_PASSWORD: pipeline_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ad_pipeline_test
+      POSTGRES_USER: pipeline_user
+      POSTGRES_PASSWORD: pipeline_pass
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Initialize test database
+        run: psql -h localhost -U pipeline_user -d ad_pipeline_test -f docker/init.sql
+        env:
+          PGPASSWORD: pipeline_pass
+      - run: python -m pytest tests/ -v --tb=short
+
+  dbt-check:
+    name: dbt Compile Check
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install dbt-postgres==1.9.0
+      - run: cd dbt_project && dbt compile --profiles-dir . --project-dir .
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_DB: ad_pipeline
+          POSTGRES_USER: pipeline_user
+          POSTGRES_PASSWORD: pipeline_pass
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker-compose build
