@@ -4,7 +4,7 @@ A production-grade data engineering observability system designed to catch "sile
 
 Built entirely with free and open-source tools: **Python 3.11, PostgreSQL, dbt, FastAPI, and AWS SAM (Serverless)**.
 
-## 🚀 The Problem This Solves
+## The Problem This Solves
 
 Traditional job orchestrators (like Airflow) tell you if code successfully ran without crashing. They **do not** tell you if the data is actually correct.
 
@@ -15,7 +15,7 @@ This platform implements a **5-Pillar Observability Engine** that catches issues
 4. **Silent Failures**: Flags successful API calls that returned 0 rows or missed date partitions.
 5. **dbt Testing**: Elevates native dbt SQL tests into real-time Slack/Email alerts.
 
-## 🏗 Architecture
+## Architecture
 
 ![Architecture](docs/architecture.md)
 
@@ -26,7 +26,7 @@ This platform implements a **5-Pillar Observability Engine** that catches issues
 - **Alerting**: Multi-channel dispatcher (Slack Webhooks, SMTP/SES Emails, Rich Console).
 - **Serving**: FastAPI REST endpoints for dashboard integration.
 
-## 💻 Local Development (Docker)
+## Local Development (Docker)
 
 You can run the entire platform locally without any cloud dependencies.
 
@@ -75,7 +75,7 @@ Or run everything automatically via the local cron scheduler:
 docker-compose logs -f app
 ```
 
-## 📡 FastAPI Monitoring Dashboard
+## FastAPI Monitoring Dashboard
 
 The platform includes a REST API to query the health of the system.
 
@@ -96,7 +96,7 @@ sam build
 sam deploy --guided
 ```
 
-## 🧪 Testing
+## Testing
 
 The project includes a comprehensive pytest suite covering the mock adapters, anomaly detection algorithms, API endpoints, and alerting logic.
 
@@ -105,7 +105,7 @@ The project includes a comprehensive pytest suite covering the mock adapters, an
 make test
 ```
 
-## 📚 Documentation Directory
+## Documentation Directory
 
 Deep dive into the technical decisions:
 - [Architecture Details](docs/architecture.md)
